@@ -2,17 +2,17 @@ package com.example.onlinemarket
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MenuAdapter.MenuItemClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val menuRecyclerView = findViewById<RecyclerView>(R.id.recyclerViewMenus)
-        val menuAdapter = MenuAdapter(getMockData())
+        val menuAdapter = MenuAdapter(getMockData(),this)
         val layoutManager = LinearLayoutManager(this,RecyclerView.VERTICAL,false)
 
         menuRecyclerView.layoutManager = layoutManager
@@ -49,4 +49,10 @@ class MainActivity : AppCompatActivity() {
         ),
 
     )
+
+    override fun onItemClicked(menuModel: MenuModel.MenuItems) {
+        Toast.makeText(this,"${menuModel.menuName} is added to card",Toast.LENGTH_LONG).show()
+    }
+
+
 }
